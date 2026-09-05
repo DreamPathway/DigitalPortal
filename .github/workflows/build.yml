@@ -126,6 +126,23 @@ jobs:
       id: pages
       uses: actions/configure-pages@v5
 
+      # ⭐⭐⭐ 新增：清理缓存和更新模块 ⭐⭐⭐
+    - name: Clean Hugo cache
+      run: |
+        echo "Cleaning Hugo cache..."
+        rm -rf ~/.cache/hugo_cache
+        rm -rf ~/.cache/go-build
+        rm -rf ~/go/pkg/mod
+        echo "Cache cleaned"
+
+    - name: Update Hugo modules
+      run: |
+        echo "Updating Hugo modules..."
+        hugo mod clean
+        hugo mod get -u github.com/HugoBlox/kit
+        hugo mod tidy
+        echo "Modules updated"
+
     - name: Build with Hugo
       env:
         HUGO_ENVIRONMENT: production
