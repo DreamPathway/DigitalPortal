@@ -3,7 +3,7 @@ title: "TaskFlow - Project Management Tool"
 date: 2024-09-20
 summary: "Real-time collaborative task management application with drag-and-drop Kanban boards and team features"
 tags:
-  - Full-Stack
+  - 全栈
   - Next.js
   - Real-Time
   - Productivity

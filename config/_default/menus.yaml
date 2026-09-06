@@ -1,20 +1,37 @@
 # Navigation Links
-#   To link a homepage section, use a hash `#` followed by the section ID.
-#   The weight parameter defines the order that the links appear.
+#   默认语言（简体中文）要链接到主页的某个部分，请使用井号（#）后跟该部分的ID。
+#   weight 参数定义了链接的显示顺序。
 
 main:
-  - name: Projects
+  - name: 项目
     url: /#projects
     weight: 10
-  - name: Skills
+  - name: 技能
     url: /#skills
     weight: 20
-  - name: Experience
+  - name: 经历
     url: /#experience
     weight: 30
-  - name: Blog
+  - name: 博客
     url: /#blog
     weight: 40
-  - name: Contact
+  - name: 联系
     url: /#contact
     weight: 50
+
+# main:
+#   - name: Projects
+#     url: /#projects
+#     weight: 10
+#   - name: Skills
+#     url: /#skills
+#     weight: 20
+#   - name: Experience
+#     url: /#experience
+#     weight: 30
+#   - name: Blog
+#     url: /#blog
+#     weight: 40
+#   - name: Contact
+#     url: /#contact
+#     weight: 50

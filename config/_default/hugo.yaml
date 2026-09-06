@@ -1,55 +1,147 @@
-# Configuration of Hugo
-# Guide: https://docs.hugoblox.com/tutorial/
-# Hugo Documentation: https://gohugo.io/getting-started/configuration/#all-configuration-settings
-# This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
+# Hugo配置 
+# 指南：https://docs.hugoblox.com/tutorial/ 
 
-# Website name (set in params.yaml under hugoblox.branding.name)
+# 网站名称（在params.yaml文件的hugoblox.branding.name下设置）
 title: ''
-# Website URL
+# 网站 URL
 baseURL: 'https://example.com/'
 
 ############################
-## LANGUAGE
+## 语言
 ############################
 
-defaultContentLanguage: en
-hasCJKLanguage: false
+# 默认语言为中文。多语言站点中决定默认使用哪套内容和界面文案。
+defaultContentLanguage: zh
+# 是否包含中日韩文字。设为 true 时 Hugo 会按字符而非空格分词（CJK 词之间无空格），影响摘要截取和字数统计。纯英文站保持 false。
+hasCJKLanguage: true
+# 是否在子目录中使用默认语言。设为 true 时，子目录中的内容会使用默认语言。纯英文站保持 false。
 defaultContentLanguageInSubdir: false
+# 是否移除路径中的重音符号。设为 true 时，路径中的重音符号会被移除，例如：/é -> /e。纯英文站保持 false。
 removePathAccents: true
 
 ############################
-## ADVANCED
+## 高级配置
 ############################
 
 build:
+  # 是否在构建时写入统计信息。设为 true 时，Hugo 会在构建完成后写入统计信息到统计文件中。
   writeStats: true
+# 是否在构建时包含 Git 信息。设为 true 时，Hugo 会在构建完成后写入 Git 信息到统计文件中。
 enableGitInfo: false
+# 摘要长度。默认值为 30。
 summaryLength: 30
+# 分页大小。默认值为 10。
 pagination:
   pagerSize: 10
+# 是否启用 Emoji 表情。设为 true 时，Hugo 会在生成的 HTML 中包含 Emoji 表情。
 enableEmoji: true
+# 是否启用 Robots.txt 文件。设为 true 时，Hugo 会在生成的 HTML 中包含 Robots.txt 文件。
 enableRobotsTXT: true
-footnotereturnlinkcontents: <sup>^</sup>
+# 构建时忽略的文件类型。默认值为 ["ipynb_checkpoints", ".Rmd", ".Rmarkdown", "_cache"]。
 ignoreFiles: [".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
+# 是否禁用别名。设为 true 时，Hugo 会禁用所有别名，只保留原始 URL。
 disableAliases: true
+# 输出格式。定义各类页面输出哪些格式的文件。默认值为 ["HTML", "RSS", "headers", "redirects", "backlinks"]。
 outputs:
+  # 首页输出的格式。默认值为 ["HTML", "RSS", "headers", "redirects", "backlinks"]。
   home: [HTML, RSS, headers, redirects, backlinks]
+  # 非首页输出的格式。默认值为 ["HTML", "RSS"]。
   section: [HTML, RSS]
+# 图像处理配置。
 imaging:
+  # 图像采样过滤器。默认值为 lanczos。
+  # 可选值：bilinear, lanczos, nearest, pixelated
+  # 缩放图片用 Lanczos 算法，质量最高（速度略慢）；
+  # 缩放图片用 Bilinear 算法，质量中等（速度中等）；
+  # 缩放图片用 Nearest 算法，质量最低（速度最快）；
+  # 缩放图片用 Pixelated 算法，质量最低（速度最快）。
   resampleFilter: lanczos
+  # 图像质量。默认值为 90。
+  # 可选值：1-100
+  # 质量越高，图片越清晰，但文件大小也会越大。
+  # 质量越低，图片越模糊，但文件大小也会越小。
+  # JPEG/WebP 输出质量 90%；
+  # PNG 输出质量 90%；
+  # SVG 输出质量 90%。
   quality: 90
+  # 图片裁剪时智能选择焦点区域（尽量保留主体）；
+  # 图像锚点。默认值为 smart。
+  # 可选值：smart, center, left, right
+  # smart：自动选择最佳锚点（默认值）；
+  # center：居中对齐；
+  # left：左对齐；
+  # right：右对齐。
   anchor: smart
+  # WebP 压缩提示为"照片类"图片，优化压缩率。
+  # 图像提示。默认值为 picture。
+  # 可选值：picture, video, audio, iframe, embed, object, svg
+  # picture：图片（默认值）；
+  # video：视频；
+  # audio：音频；
+  # iframe：内联框架；
+  # embed：嵌入；
+  # object：对象；
+  # svg：SVG 图像。
   hint: picture
+# 构建超时时间 600000 毫秒（600 秒）。
+# 大站点或 Tailwind 首次编译较慢时避免构建被强制中断。
 timeout: 600000
+# 分类和标签。
+# 定义内容的分类体系（左边是分类类型，右边是对应的 URL 路径/复数形式）
 taxonomies:
+  # 作者分类。按作者归类，路径 /authors/；
   author: authors
+  # 标签分类。按标签归类，路径 /tags/；
   tag: tags
+  # 文章分类。按大类归类（如"前端/后端/随笔"），路径 /categories/；
+  # 文章 front matter 中用 categories: [分类名] 引用。
+  category: categories
+  # 发布类型分类。按发布类型归类，路径 /publication_types/
+  # 出版物类型（学术模板遗留，如期刊/会议分类）。
+  # 可选值：["paper", "conference", "book", "chapter", "report", "thesis", "other"]
+  # paper：论文；
+  # conference：会议；
+  # book：书籍；
+  # chapter：章节；
+  # report：报告；
+  # thesis：毕业论文；
+  # other：其他。
   publication_type: publication_types
+# Markdown 渲染配置。
+# 定义 Markdown 文档的渲染选项。
 markup:
+  # 与 Blox 主题模块自带的 markup 默认配置做深度合并而不是整体覆盖——主题的 Goldmark/高亮设置保留，
+  # 这里只覆盖显式写出的项。
   _merge: deep
+  # Goldmark 扩展配置。
+  goldmark:
+    extensions:
+      footnote:
+        # 脚注返回链接显示为上标的 ^
+        backlinkHTML: '<sup>^</sup>'   # 脚注返回链接显示为上标的 ^
+  # 代码高亮配置。
+  # 定义代码高亮的选项。
   highlight:
+    # 是否显示代码号。默认值为 false。代码块不显示行号
     lineNos: false
+# 安全配置。
+# 定义安全相关的选项。
 security:
+  # 同样与主题的默认安全配置深度合并。
   _merge: deep
+  # Hugo v0.161+ 会以 Node 权限沙箱（--permission）启动 Tailwind CLI，但该机制在你的环境有两个问题：Node 20 不认 --permission 参数；Node 22.13 在 Windows 上会原生崩溃。
+  # Hugo v0.161+ launches Node (Tailwind CLI) under Node's permission model
+  # (--permission). That crashes on Windows with Node 22.x
+  # ("Assertion failed: !path_prefix.empty()") and is unsupported by Node <22.13
+  # ("bad option: --permission"). Disable it so the Tailwind CLI runs normally.
+  # 禁用 Node 权限沙箱。
+  # 这可以避免在 Windows 上的 Node 22.13 版本崩溃。
+  node:
+    permissions:
+      disable: true
+# Sitemap 配置。
+# 定义 Sitemap 相关的选项。
 sitemap:
+  # 站点地图（sitemap.xml）配置与主题默认值深度合并。
+  # 这里没有覆盖具体项，相当于显式声明"沿用主题默认"（默认包含所有公开页面、changefreq 等）。
   _merge: deep

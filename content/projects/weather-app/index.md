@@ -3,7 +3,7 @@ title: "WeatherNow - Real-Time Weather App"
 date: 2024-06-10
 summary: "Beautiful weather application with real-time data, 7-day forecasts, and interactive maps"
 tags:
-  - Frontend
+  - 前端
   - React
   - API Integration
   - PWA

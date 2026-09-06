@@ -1,185 +1,258 @@
 # ══════════════════════════════════════════════════════════════════════════════
-# HUGO BLOX CONFIGURATION
-# Schema: hugoblox.com/schema/v2
-# Tutorial: https://docs.hugoblox.com/tutorial/
-# Documentation: https://docs.hugoblox.com/
+# HUGO BLOX 配置
+# 模式：hugoblox.com/schema/v2
+# 教程：https://docs.hugoblox.com/tutorial/
+# 文档：https://docs.hugoblox.com/
 # ══════════════════════════════════════════════════════════════════════════════
 hugoblox:
   schema: "2.0"
 
   # ────────────────────────────────────────────────────────────────────────────
-  # IDENTITY
-  # Site-level branding (for people/profiles, use the author system in content/authors/)
+  # 站点标识
+  # 站点级品牌化（对于个人/资料，请使用content/authors/中的作者系统）
   # ────────────────────────────────────────────────────────────────────────────
   identity:
-    # Site name - shown in navbar, footer, copyright, and browser title by default
-    name: "Your Name"
-    # Legal entity for copyright notices (defaults to name if not set)
-    organization: ""
-    # Schema.org type for structured data
+    # 站点名称（在导航栏、页脚、版权、浏览器标题中显示）
+    name: "拾光舍"
+    # 法律实体（用于版权通知，默认值为站点名称）
+    organization: "拾光舍"
+    # Schema.org类型（用于结构化数据）
     type: person                        # person | organization | local_business
-    # Short tagline displayed on your site
-    tagline: "Full-Stack Developer"
-    # Site meta description for search engines and social sharing
-    description: "Modern developer portfolio showcasing web development projects, technical blog posts, and open source contributions. Built with Hugo Blox."
-    # Social accounts (used for meta tags like Twitter Cards)
+    # 站点短语（在导航栏、页脚、版权、浏览器标题中显示）
+    tagline: "全栈开发者"
+    # 站点元描述（用于搜索引擎和社交媒体分享）
+    description: "现代开发者作品集，展示网页开发项目、技术博客文章和开源贡献。"
+    # 社交账号（用于社交媒体分享）
     social:
-      twitter: "yourusername"              # Twitter/X handle for Twitter Cards (without @)
+      twitter: "zlovem0"              # Twitter/X handle for Twitter Cards (without @)
 
   # ────────────────────────────────────────────────────────────────────────────
-  # THEME
-  # Color and visual design system
+  # 主题配置
+  # 颜色和视觉设计系统（用于定义站点的外观和感觉，包括颜色、字体、间距、形状等）
   # ────────────────────────────────────────────────────────────────────────────
   theme:
-    # Mode: 'light', 'dark', or 'system' (follows OS preference)
+    # 主题模式（light、dark、system（跟随系统主题））
     mode: dark
-    # Theme pack: name from data/themes/ or { light: "x", dark: "y" } for mix-and-match
+    # 主题包：名称来自data/themes/目录，或{light: "x", dark: "y"}，用于混合搭配 不同的颜色方案
     pack: "default"
-    # Optional: Override theme pack colors
+    # 可选配置：覆盖主题包的颜色
     colors:
-      primary: ""                       # Tailwind palette name or hex (e.g., "indigo" or "#6366f1")
+      # 主要颜色（用于主要操作和强调）
+      primary: ""                       # Tailwind 调色板名称或十六进制代码（例如，“indigo”或“#6366f1”）
+      # 次要颜色（用于次要操作和强调）
       secondary: ""
-      neutral: ""                       # Affects gray utilities (text-gray-*, bg-gray-*)
-    # Optional: Mode-specific color overrides
+      # 中性颜色（用于背景、边框、文本等）
+      neutral: ""                       # 影响灰色工具（例如，text-gray-*、bg-gray-*）
+    # 可选配置：模式特定的颜色覆盖
+    # 光明模式颜色覆盖
     colors_light: {}
+    # 暗黑模式颜色覆盖
     colors_dark: {}
-    # Optional: Semantic surface color overrides
+    # 可选配置：语义表面表面颜色覆盖（页面背景/前景、页头背景/前景、页脚背景/前景），做精细视觉调整用。
     surfaces:
+      # 页面背景/前景
       background: ""
       foreground: ""
+      # 页头背景/前景
       header:
         background: ""
         foreground: ""
+      # 页脚背景/前景
       footer:
         background: ""
         foreground: ""
 
   # ────────────────────────────────────────────────────────────────────────────
-  # TYPOGRAPHY
-  # Font and text sizing
+  # typography 字体配置
+  # 字体和文本大小
   # ────────────────────────────────────────────────────────────────────────────
   typography:
-    # Theme pack: name from data/fonts/
+    # 主题包(字体包)，名称来自 data/fonts/，"developer" 是为开发者作品集设计的字体组合。
     pack: "developer"
 
   # ────────────────────────────────────────────────────────────────────────────
-  # LAYOUT
-  # Spacing and shape tokens
+  # layout 布局配置
+  # 间距和形状令牌 （用于定义站点的间距和形状，包括边框半径、间距密度、头像形状等）
   # ────────────────────────────────────────────────────────────────────────────
   layout:
-    # Border radius: 'none', 'sm', 'md', 'lg', or 'full'
+    # 全局圆角大小: 'none', 'sm', 'md', 'lg', or 'full'
     radius: "md"
-    # Spacing density: 'compact', 'comfortable', or 'spacious'
+    # 间距密度: 'compact'（紧凑）, 'comfortable'（舒适）, 'spacious'（开放）
     spacing: "comfortable"
-    # Avatar shape in author profiles
+    # 作者头像形状 circle（圆形） | square（方形） | rounded（圆角矩形）
     avatar_shape: circle                # circle | square | rounded
 
   # ────────────────────────────────────────────────────────────────────────────
-  # HEADER
-  # Site header and navigation bar
+  # header 页头配置
+  # 站点页头和导航栏
+  # 站点页头和导航栏的配置，包括是否启用、样式变体、是否固定在顶部、菜单对齐方式、功能切换按钮等
   # ────────────────────────────────────────────────────────────────────────────
   header:
+    # 是否启用页头，显示页头导航栏。
     enable: true
-    # Header style variant
+    # 页头样式（navbar 完整导航 / navbar-simple 简洁 / minimal 极简）
     style: navbar                       # navbar | navbar-simple | minimal
-    # Stick to top on scroll
+    # 是否固定在顶部，滚动时保持在顶部。
     sticky: true
-    # Menu alignment
+    # 菜单对齐方式（left、center、right）
     align: center                       # left | center | right
-    # Feature toggles
+    # 功能切换按钮
+    # 是否显示搜索框
     search: true
+    # 是否显示主题切换按钮（明暗切换按钮）
     theme_toggle: true
+    # 是否显示主题选择器 (颜色主题选择器)
     theme_picker: true
+    # 是否显示语言切换器 (语言切换器) （当前只有中文一种语言，这个按钮实际不会显示内容）。
     language_switcher: true
-    # Call-to-action button
+    # 是否显示行动按钮（CTA按钮）导航栏右侧的行动按钮（如“联系我”）。
     cta:
-      enable: false
-      text: ""
-      url: ""
+      enable: true
+      text: "联系我"
+      url: "/#contact"
 
   # ────────────────────────────────────────────────────────────────────────────
-  # FOOTER
-  # Site footer
+  # footer 页脚配置
+  # 站点页脚的配置，包括是否启用、样式变体、是否显示语言切换器、自定义页脚文本等
   # ────────────────────────────────────────────────────────────────────────────
   footer:
-    # Footer style variant
+    # 是否启用页脚，显示页脚导航栏。
+    enable: true
+    # 页脚样式（minimal 极简 / columns 多栏 / centered 居中）
     style: minimal                      # minimal | columns | centered
+    # 是否显示语言切换器 (语言切换器) （当前只有中文一种语言，这个按钮实际不会显示内容）。
     language_switcher: true
-    # Custom footer text (HTML supported)
+    # 自定义页脚文本（支持HTML）
     text: ""
 
   # ────────────────────────────────────────────────────────────────────────────
-  # COPYRIGHT
-  # Legal notices and licensing
+  # copyright 版权配置
+  # 版权和授权信息的配置，包括是否启用、版权通知、授权类型、是否允许衍生作品、是否允许相同授权、是否允许商业使用等
   # ────────────────────────────────────────────────────────────────────────────
   copyright:
-    # Copyright notice - supports {year}, {name}, {license} placeholders
-    notice: "© {year} {name}. This work is licensed under {license}"
+    # 版权通知（支持{year}、{name}、{license}）
+    notice: "© {year} {name}. All rights reserved."
+    # notice: "© {year} {name}. This work is licensed under {license}"   
+    # 许可证设置
+    # cc = 显示知识共享图标（BY/NC/SA/ND 组合）；custom = 不显示图标，仅保留版权通知。
     license:
-      type: cc                          # cc | custom
-      allow_derivatives: false
-      share_alike: true
-      allow_commercial: false
+    #   # 版权授权类型（cc 知识共享授权 | custom 自定义授权）
+      type: custom                          # cc | custom
+    #   # 是否允许衍生作品
+    #   allow_derivatives: false
+    #   # 是否允许相同方式共享
+    #   share_alike: true
+    #   # 是否允许商业使用
+    #   allow_commercial: false
+
+    # 许可证设置
+    # license:
+    #   # 版权授权类型（cc 知识共享授权 | custom 自定义授权）
+    #   type: cc                          # cc | custom
+    #   # 是否允许衍生作品
+    #   allow_derivatives: false
+    #   # 是否允许相同方式共享
+    #   share_alike: true
+    #   # 是否允许商业使用
+    #   allow_commercial: false
 
   # ────────────────────────────────────────────────────────────────────────────
-  # SEO
-  # Search engine optimization - overrides and technical settings
+  # SEO 搜索引擎优化配置
+  # 搜索引擎优化的配置，包括是否启用、浏览器标签标题覆盖、本地业务配置、AI/LLM爬虫指导等
+  # ────────────────────────────────────────────────────────────────────────────
   # ────────────────────────────────────────────────────────────────────────────
   seo:
-    # Browser tab title override (defaults to identity.name if not set)
+    # 浏览器标签标题覆盖（默认使用identity.name，如果未设置，则使用identity.name（站点名称）作为浏览器标签标题。
     title: ""
-    # For local_business identity type only
+    # 仅适用于本地商户标识类型（local_business）
+    # 包含地址、城市、坐标、联系电话等信息。
     location:
+      # 地址信息
       address:
+        # 街道地址
+        # 包含街道名称、街道号码、街道类型（如“Main”、“Park”等）等。
         street: ""
+        # 城市
         city: ""
+        # 区域（如“CA”、“NY”等）
+        # 包含区域名称、区域代码、区域类型（如“State”、“Country”等）等。
         region: ""
+        # 邮政编码
+        # 包含邮政编码（如“90210”）。
+        # 如果未设置，则使用identity.postal_code（站点邮政编码）。
         postal_code: ""
+        # 国家/地区
+        # 包含国家/地区名称（如“United States”、“China”等）。
+        # 如果未设置，则使用identity.country（站点国家/地区）。
         country: ""
+      # 坐标信息
+      # 包含经度和纬度（如-122.4194, 37.7749）。
+      # 如果未设置，则使用identity.coordinates（站点坐标）。
       coordinates:
+        # 纬度
+        # 包含纬度（如37.7749）。
         latitude: null
+        # 经度
+        # 包含经度（如-122.4194）。
         longitude: null
+      # 联系电话
+      # 包含联系电话（如+1234567890）。
+      # 如果未设置，则使用identity.phone（站点联系电话）。
       phone: ""
-    # AI/LLM crawler guidance (llms.txt)
+    # AI/LLM爬虫指导（llms.txt，生成 llms.txt 文件指导 AI 爬虫
+    # allow: [/] 允许抓全站，disallow 排除路径，note 给 AI 的说明，contact 联系方式。
     ai:
+      # allow 允许抓取的路径 [/] 允许抓全站
+      # 包含所有页面路径（如/projects、/skills等）。
+      # 如果未设置，则使用identity.allow（站点允许抓取的路径）。
       allow:
         - /
+      # disallow 排除路径
+      # 包含所有页面路径（如/projects、/skills等）。
+      # 如果未设置，则使用identity.disallow（站点排除路径）。
       disallow: []
-      note: "Guidance for AI crawlers - customize to match your public content."
+      # note 给 AI 的说明
+      note: "This website's content can be used for training and research purposes, provided proper attribution is given."
+      # contact 联系方式
+      # 包含联系电话（如+1234567890）。
+      # 如果未设置，则使用identity.phone（站点联系电话）。
       contact: ""
 
   # ────────────────────────────────────────────────────────────────────────────
-  # CONTENT
-  # Content rendering and behavior
+  # content 内容配置
+  # 内容渲染和行为
   # ────────────────────────────────────────────────────────────────────────────
   content:
-    # Math rendering
+    # 数学渲染配置 （LaTeX/KaTeX），写技术博客如需公式可开启。
     math:
       enable: false
-    # Table of contents
+    # 文章页面显示目录
     toc:
       enable: true
-    # Reading time estimates
+    # 显示阅读时长估计
     reading_time:
       enable: true
-    # Academic citations (disabled for developer portfolio)
+    # 学术引用格式 （APA、MLA、Chicago、IEEE）
     citations:
       style: apa                        # apa | mla | chicago | ieee
 
   # ────────────────────────────────────────────────────────────────────────────
-  # SEARCH
-  # Site search
+  # search 搜索配置
+  # 站点搜索功能
   # ────────────────────────────────────────────────────────────────────────────
   search:
+    # 是否启用搜索功能
+    # 配合 package.json 里的 pagefind 命令工作——hugo --minify 构建后由 pagefind 建立搜索索引（这也是之前 pnpm build 脚本里 pagefind --site public 的用途）。
     enable: true
-    # Trending/suggested search terms
+    # 搜索框里的热门/建议搜索词。
     suggestions: []
-    # Quick action shortcuts in search modal
+    # 搜索弹窗里的快捷操作
     quick_actions: []
 
   # ────────────────────────────────────────────────────────────────────────────
-  # COMMENTS
-  # User comments system
+  # comments 评论配置
+  # 用户评论系统配置
+  # 用户可以在文章页面评论，
   # ────────────────────────────────────────────────────────────────────────────
   comments:
     enable: false
@@ -193,8 +266,8 @@ hugoblox:
       shortname: ""
 
   # ────────────────────────────────────────────────────────────────────────────
-  # ANALYTICS
-  # Traffic and behavior analytics
+  # analytics 分析配置
+  # 流量和行为分析配置
   # ────────────────────────────────────────────────────────────────────────────
   analytics:
     google:
@@ -213,8 +286,8 @@ hugoblox:
       site_id: ""
 
   # ────────────────────────────────────────────────────────────────────────────
-  # VERIFICATION
-  # Search engine site verification codes
+  # verification 验证配置
+  # 搜索引擎站点验证代码
   # ────────────────────────────────────────────────────────────────────────────
   verification:
     google: ""
@@ -225,8 +298,8 @@ hugoblox:
     naver: ""
 
   # ────────────────────────────────────────────────────────────────────────────
-  # REPOSITORY
-  # Source code repository for "Edit this page" links
+  # repository 仓库配置
+  # “编辑此页面”链接的源代码仓库
   # ────────────────────────────────────────────────────────────────────────────
   repository:
     enable: false
@@ -235,55 +308,74 @@ hugoblox:
     content_dir: content
 
   # ────────────────────────────────────────────────────────────────────────────
-  # LOCALE
-  # Regional formatting preferences
+  # locale 语言配置
+  # 语言格式化偏好
   # ────────────────────────────────────────────────────────────────────────────
   locale:
-    date_format: "Jan 2, 2006"          # Go time format
-    time_format: "3:04 PM"
+    # 日期格式
+    date_format: "2006-01-02"          # Go time format
+    # 时间格式
+    time_format: "15:04"
+    # 地址格式
     address_format: en-us
 
   # ────────────────────────────────────────────────────────────────────────────
-  # SECURITY
-  # Security headers and policies (requires Netlify integration)
+  # security 安全配置
+  # 安全头和策略（需要 Netlify 集成）（配合首页输出的 _headers 文件）
   # ────────────────────────────────────────────────────────────────────────────
   security:
+    # 内容安全策略（CSP）
+    # 防止跨站脚本攻击（XSS）和数据注入攻击（SQL 注入）
     csp:
       policy: ""
       report_only: false
+    # X-Frame-Options（当前 allow 允许被 iframe 嵌入）  
     frame_options: allow                 # deny | sameorigin | allow - allow enables iframe embedding
+    # 权限策略（Permissions Policy）
+    # 控制浏览器如何处理不同来源的资源（如字体、图片、脚本等）
     permissions_policy: ""
 
   # ────────────────────────────────────────────────────────────────────────────
-  # PRIVACY
-  # Privacy and compliance features
+  # privacy 隐私配置
+  # 隐私和合规功能
   # ────────────────────────────────────────────────────────────────────────────
   privacy:
+    # 隐私合规模式（配合分析工具匿名化访客 IP 等）
     enable: false
+    # 匿名化分析数据（配合分析工具）
     anonymize_analytics: true
 
   # ────────────────────────────────────────────────────────────────────────────
-  # DEBUG
-  # Development and debugging (hidden in production)
+  # debug 调试配置
+  # 开发和调试（在生产环境中隐藏）
   # ────────────────────────────────────────────────────────────────────────────
   debug:
     enable: false
+    # 开发调试浮层（HUD）
+    # 显示构建信息，生产环境自动隐藏，当前关闭。
     hud:
       position: bottom-left             # top-left | top-right | bottom-left | bottom-right
       opacity: 1.0
     export_logs: true
 
   # ────────────────────────────────────────────────────────────────────────────
-  # PREMIUM
-  # Premium features and creator program (affiliates)
+  # pro 高级配置 (付费功能)
+  # 高级功能和创作者计划（affiliate）
   # ────────────────────────────────────────────────────────────────────────────
   pro:
     # Hide "Powered by HugoBlox" attribution
     # Requires: HugoBlox Premium to support HugoBlox via alternative means
     # Note: Even with Premium, you can keep this false to support open source!
     # Get Premium: https://hugoblox.com/premium
+    # 隐藏“Powered by HugoBlox”
+    # 需要 HugoBlox Premium 支持 HugoBlox 以替代方式支持
+    # 注意：即使有 Premium，也可以保持为 false 来支持开源！
+    # 隐藏它官方要求购买 Premium（也鼓励保留以支持开源）。
     hide_attribution: false
     
     # Affiliate referral code for rewards program
     # Join affiliate program: https://hugoblox.com/affiliates
+    # HugoBlox 推荐返佣计划的推广码
+    # 加入创作者计划（affiliate）: https://hugoblox.com/affiliates
+    # 用于在创作者计划（affiliate）中注册并获得奖励。
     affiliate_code: ""

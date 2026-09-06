@@ -1,100 +1,200 @@
 schema: hugoblox/author/v1
+# 作者唯一标识。头像会自动找 assets/media/authors/me.png（slug 同名文件）
 slug: me
+# 标记为站点所有者，用于 SEO 归属、隐私页、文章作者识别
 is_owner: true
+# 结构化姓名，用于显示在页面上
 name:
-  display: Alex Johnson
-  given: Alex
-  family: Johnson
+  # 显示姓名，用于显示在页面上(页面上显示的全名)
+  # 如果未指定，将使用 given + family
+  display: Mizar Zenith
+  # 姓，用于显示在页面上(页面上显示的姓)
+  given: Mizar
+  # 名，用于显示在页面上(页面上显示的名)
+  family: Zenith
+# 姓名后缀学位  
 postnominals: []
+# 头像右下角的小徽章图标。💻开发者、🎨设计师、🚀创业者、🔬研究员、🎓学生。
 status:
   icon: "💻"  # Emoji shown on avatar badge: 💻 developer, 🎨 designer, 🚀 startup, 🔬 researcher, 🎓 student
-role: Full-Stack Developer
-email: alex@example.com
+# 角色，用于显示在页面上(页面上显示的角色)
+role: Record and Developer
+# 邮箱，用于显示在页面上(页面上显示的邮箱)
+email: service@011231.xyz
+# 个人简介，| 表示多行文本。显示在 Hero 区和作者卡片中。
 bio: |
-  Full-stack developer with 5+ years of experience building scalable web applications.
-  Passionate about modern JavaScript, cloud architecture, and creating delightful user experiences.
+  你好，我是 Mizar Zenith。在这里分享我的项目、代码与日常思考。愿每一次创作都有回响。
 
-affiliations:
-  - name: Tech Corp
-    url: https://techcorp.example.com
+# affiliations（所属机构）
+# affiliations:
+#   - name: Tech Corp
+#     url: https://techcorp.example.com
 
+# links（社交链接）
 links:
   - icon: at-symbol
-    url: mailto:alex@example.com
+    url: mailto:service@011231.xyz
     label: E-mail Me
   - icon: brands/github
-    url: https://github.com/alexjohnson
-  - icon: brands/linkedin
-    url: https://www.linkedin.com/in/alexjohnson/
+    url: https://github.com/DreamPathway
+  # - icon: brands/linkedin
+  #   url: https://www.linkedin.com/in/alexjohnson/
   - icon: brands/x
-    url: https://x.com/alexjohnson
+    url: https://x.com/zlovem0
+  - icon: brands/telegram
+    url: https://t.me/zlovemo
 
+# interests（兴趣）
 interests:
   - Web Development
   - Cloud Architecture
   - Open Source
   - Developer Experience
 
-education:
-  - degree: B.S. Computer Science
-    institution: State University
-    start: 2015-09-01
-    end: 2019-05-31
-    summary: |
-      Focus on software engineering and distributed systems.
-      Senior project on distributed caching systems.
-    button:
-      text: View Project
-      url: https://github.com/alexjohnson/senior-project
-      icon: brands/github
+# education（教育经历）
+# education:
+#   # 学位名称
+#   - degree: B.S. Computer Science
+#     # 学校名称
+#     institution: State University
+#     # 学习时间
+#     start: 2015-09-01
+#     end: 2019-05-31
+#     # 学习内容
+#     summary: |
+#       Focus on software engineering and distributed systems.
+#       Senior project on distributed caching systems.
+#     # 可选按钮：text 按钮文字、url 跳转链接、icon 按钮图标（这里链到毕业设计仓库）  
+#     button:
+#       text: View Project
+#       url: https://github.com/alexjohnson/senior-project
+#       icon: brands/github
 
+# experience（工作经历）
 experience:
-  - role: Senior Software Engineer
-    org: Tech Corp
-    start: 2023-01-01
+  # 职位
+  - role: 大数据开发工程师
+    # 公司名称
+    org: dp
+    # 工作时间
+    start: 2025-10-01
+    # 工作内容描述
     summary: |
-      Lead development of microservices architecture serving 1M+ users.
-      Improved API response time by 40% through optimization.
-      Mentored team of 5 junior developers.
-  - role: Full-Stack Developer
-    org: Startup Inc
-    start: 2021-06-01
-    end: 2022-12-31
-    summary: |
-      Built and deployed 3 production applications from scratch.
-      Implemented CI/CD pipeline reducing deployment time by 60%.
-      Led migration from monolith to microservices architecture.
-  - role: Junior Developer
-    org: Web Agency
-    start: 2020-01-01
-    end: 2021-05-31
-    summary: |
-      Developed client websites using React and modern web technologies.
-      Participated in code reviews and agile ceremonies.
+      主导实时数据管道开发，日处理数据量 10TB+。
+      通过 Spark 结构化流与性能调优，将计算时间缩短 45%。
+      搭建并维护实时数据湖仓架构，支撑 50+ 下游团队的秒级数据需求。
+  # - role: Full-Stack Developer
+  #   org: Startup Inc
+  #   start: 2021-06-01
+  #   end: 2022-12-31
+  #   summary: |
+  #     Built and deployed 3 production applications from scratch.
+  #     Implemented CI/CD pipeline reducing deployment time by 60%.
+  #     Led migration from monolith to microservices architecture.
+  # - role: Junior Developer
+  #   org: Web Agency
+  #   start: 2020-01-01
+  #   end: 2021-05-31
+  #   summary: |
+  #     Developed client websites using React and modern web technologies.
+  #     Participated in code reviews and agile ceremonies.
 
+# skills（技能）
+# 分组的技能条，tech-stack 区块从这里读取 name/icon/level
 skills:
-  - name: Development
+  - name: 语言
     items:
-      - label: TypeScript
-        level: 5
-      - label: React
-        level: 5
       - label: Node.js
+        icon: devicon/nodejs
+        level: 5
+      - label: JavaScript
+        icon: devicon/javascript
         level: 5
       - label: Python
+        icon: devicon/python
         level: 4
-  - name: DevOps
+      - label: Java
+        icon: devicon/java
+        level: 4
+      - label: TypeScript
+        icon: devicon/typescript
+        level: 4  
+
+  - name: 前端
+    items:
+      - name: React
+        icon: devicon/react
+        level: 4
+      - name: Next.js
+        icon: devicon/nextjs
+        level: 4
+      - name: Tailwind CSS
+        icon: devicon/tailwindcss
+        level: 4
+      - name: Alpine.js
+        icon: devicon/alpinejs
+        level: 4
+      - name: Vue.js
+        icon: devicon/vuejs
+        level: 4  
+
+  - name: 后端
+    items:
+      - name: Node.js
+        icon: devicon/nodejs
+        level: 5
+      - name: Express
+        icon: devicon/express
+      - name: PostgreSQL
+        icon: devicon/postgresql
+        level: 5
+      - name: Redis
+        icon: devicon/redis
+        level: 5
+      - name: Spring Boot
+        icon: brands/springboot
+        level: 5  
+        
+  - name: 大数据
+    items:
+      - label: Spark
+        icon: devicon/apachespark
+        level: 4
+      - label: Kafka
+        icon: devicon/apachekafka
+        level: 4
+      - label: Hadoop
+        icon: devicon/hadoop
+        level: 4
+      - label: Flink
+        icon: brands/apacheflink
+        level: 4
+      - label: Hive
+        icon: brands/apachehive
+        level: 4
+  - name: 运维
     items:
       - label: Docker
-        level: 4
-      - label: AWS
+        icon: devicon/docker
         level: 4
       - label: CI/CD
+        icon: brands/github
         level: 5
+      - label: Git
+        icon: devicon/git
+        level: 4
+      - label: Prometheus
+        icon: devicon/prometheus
+        level: 4
+      - label: Grafana
+        icon: devicon/grafana
+        level: 4
 
+# languages（语言能力）
 languages:
-  - name: English
+  - name: 中文
     level: 5
-    label: Native
+    label: 母语
 
+# awards（奖项）
 awards: []

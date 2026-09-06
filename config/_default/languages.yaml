@@ -1,22 +1,23 @@
-# Languages
-#   Create a section for each of your site's languages.
-#   Documentation: https://docs.hugoblox.com/reference/language/
+# 语言配置
+#   为您的网站每个语言创建一个部分。
+#   文档：https://docs.hugoblox.com/reference/language/ 
 
-# Default language
-en:
-  locale: en-us
-  # Uncomment for multi-lingual sites, and move English content into `en` sub-folder.
-  #contentDir: content/en
+# 默认语言（简体中文）
+zh:
+  locale: zh-Hans
+  # 取消注释并把中文内容放入 `zh` 子目录：
+  #contentDir: content/zh
 
-# Uncomment the lines below to configure your website in a second language.
-#zh:
-#  locale: zh-Hans
-#  contentDir: content/zh
-#  title: Chinese website title...
+# 如需繁体中文，可将上面的 locale 改为 zh-Hant（界面文案自动使用主题的繁体翻译）。
+# 如需中英双语，取消下面注释并把英文内容放入 content/en 目录：
+#en:
+#  locale: en-us
+#  contentDir: content/en
+#  title: English website title...
 #  params:
-#    description: Site description in Chinese...
+#    description: Site description in English...
 #  menu:
 #    main:
-#      - name: 传
-#        url: '#about'
+#      - name: Projects
+#        url: /#projects
 #        weight: 1
