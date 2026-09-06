@@ -4,7 +4,7 @@
 # 网站名称（在params.yaml文件的hugoblox.branding.name下设置）
 title: ''
 # 网站 URL
-baseURL: 'https://example.com/'
+baseURL: 'https://dreampathway.github.io/DigitalPortal/'
 
 ############################
 ## 语言
