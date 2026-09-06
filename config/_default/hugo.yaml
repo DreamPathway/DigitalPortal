@@ -5,8 +5,6 @@
 title: ''
 # 网站 URL
 baseURL: 'https://dreampathway.github.io/DigitalPortal/'
-canonifyURLs: true
-relativeURLs: false
 
 ############################
 ## 语言
