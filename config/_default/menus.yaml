@@ -4,19 +4,19 @@
 
 main:
   - name: 项目
-    url: '#projects'
+    url: /#projects
     weight: 10
   - name: 技能
-    url: '#skills'
+    url: /#skills
     weight: 20
   - name: 经历
-    url: '#experience'
+    url: /#experience
     weight: 30
   - name: 博客
-    url: '#blog'
+    url: /#blog
     weight: 40
   - name: 联系
-    url: '#contact'
+    url: /#contact
     weight: 50
 
 # main:
