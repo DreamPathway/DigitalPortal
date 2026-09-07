@@ -1,5 +1,6 @@
 build:
-  hugo_version: '0.162.0'
+  # 0.162.0 存在 Scratch 回归 bug（触发 blox 主题 build_links.html 报 nil map），固定用 0.161.1
+  hugo_version: '0.161.1'
 deploy:
   # Deployment target: github-pages, netlify, vercel, cloudflare, or none
   # 同时部署到 GitHub Pages 和华为云服务器（.github/workflows/deploy-server.yml）
