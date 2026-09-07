@@ -125,33 +125,61 @@ jobs:
         fi
 
     # ──────────────────────────────────────────────
-    # 10. 配置 SSH 密钥
+    # 10. 检查必需的 Secrets 是否已配置（快速失败，避免到 SSH 步骤才报模糊错误）
+    # ──────────────────────────────────────────────
+    - name: Check required secrets
+      env:
+        SSH_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+        HOST: ${{ secrets.SERVER_IP }}
+        USERNAME: ${{ secrets.SERVER_USERNAME }}
+        PORT: ${{ secrets.SERVER_PORT }}
+        DEPLOY_PATH: ${{ secrets.SERVER_DEPLOY_PATH }}
+      run: |
+        names=(SERVER_PRIVATE_KEY SERVER_IP SERVER_USERNAME SERVER_PORT SERVER_DEPLOY_PATH)
+        values=("$SSH_KEY" "$HOST" "$USERNAME" "$PORT" "$DEPLOY_PATH")
+        missing=()
+        for i in "${!names[@]}"; do
+          if [ -z "${values[$i]}" ]; then
+            missing+=("${names[$i]}")
+          fi
+        done
+        if [ ${#missing[@]} -gt 0 ]; then
+          echo "::error::以下 Secrets 未配置或为空（GitHub 仓库 Settings → Secrets and variables → Actions）:"
+          for var in "${missing[@]}"; do
+            echo "::error::  - $var"
+          done
+          exit 1
+        fi
+        echo "✅ 所需 Secrets 均已配置"
+
+    # ──────────────────────────────────────────────
+    # 11. 配置 SSH 密钥
     # ──────────────────────────────────────────────
     - name: Setup SSH key
       uses: webfactory/ssh-agent@v0.9.1
       with:
-        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+        ssh-private-key: ${{ secrets.SERVER_PRIVATE_KEY }}
 
     # ──────────────────────────────────────────────
-    # 11. 将服务器添加到 known_hosts（防首次连接卡住）
+    # 12. 将服务器添加到 known_hosts（防首次连接卡住）
     # ──────────────────────────────────────────────
     - name: Add server to known_hosts
       run: |
-        ssh-keyscan -p ${{ secrets.SERVER_PORT }} -t ed25519,rsa,ecdsa ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+        ssh-keyscan -p ${{ secrets.SERVER_PORT }} -t ed25519,rsa,ecdsa ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts 2>/dev/null
 
     # ──────────────────────────────────────────────
-    # 12. 部署到华为云服务器（rsync 同步）
+    # 13. 部署到华为云服务器（rsync 同步）
     # ──────────────────────────────────────────────
     - name: Deploy via rsync
       run: |
-        echo "Deploying to ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PORT }}${{ secrets.SERVER_DEPLOY_PATH }}"
+        echo "Deploying to ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_PORT }}${{ secrets.SERVER_DEPLOY_PATH }}"
 
         rsync -avz --delete \
           --exclude='.well-known' \
           --exclude='.user.ini' \
           -e "ssh -p ${{ secrets.SERVER_PORT }}" \
           ./public/ \
-          ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_DEPLOY_PATH }}
+          ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DEPLOY_PATH }}
 
         echo "✅ Deployment completed successfully!"
 
