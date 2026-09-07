@@ -107,7 +107,7 @@ hugoblox:
     language_switcher: true
     # 是否显示行动按钮（CTA按钮）导航栏右侧的行动按钮（如“联系我”）。
     cta:
-      enable: true
+      enable: false
       text: "联系我"
       url: "#contact"
 

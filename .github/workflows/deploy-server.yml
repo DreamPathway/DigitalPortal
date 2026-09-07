@@ -1,0 +1,168 @@
+name: Deploy to Huawei Cloud Server
+
+# 触发条件：push 到 main 分支时自动部署，也可手动触发
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch: # 允许在 Actions 页面手动触发
+
+# 只读权限，部署通过 SSH key 完成
+permissions:
+  contents: read
+
+# 避免并发部署，新的 push 会取消正在跑的旧部署
+concurrency:
+  group: deploy-server
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  deploy:
+    if: github.repository_owner != 'HugoBlox'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+    # ──────────────────────────────────────────────
+    # 1. 拉取代码
+    # ──────────────────────────────────────────────
+    - name: Checkout
+      uses: actions/checkout@v6
+      with:
+        # 完整拉取历史记录，Hugo 的 .GitInfo 和 .Lastmod 需要
+        fetch-depth: 0
+
+    # ──────────────────────────────────────────────
+    # 2. 安装 Node.js
+    # ──────────────────────────────────────────────
+    - name: Setup Node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    # ──────────────────────────────────────────────
+    # 3. 安装 pnpm
+    # ──────────────────────────────────────────────
+    - name: Setup pnpm
+      if: hashFiles('package.json') != ''
+      uses: pnpm/action-setup@v6
+
+    # ──────────────────────────────────────────────
+    # 4. 读取 Hugo 版本（从 hugoblox.yaml）
+    # ──────────────────────────────────────────────
+    - name: Get Hugo Version
+      id: hugo-version
+      run: |
+        YQ_VERSION="v4.44.1"
+        wget -q --tries=3 --waitretry=1 -O /tmp/yq \
+          "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64"
+        sudo mv /tmp/yq /usr/local/bin/yq
+        sudo chmod +x /usr/local/bin/yq
+
+        VERSION=$(yq '.build.hugo_version // ""' hugoblox.yaml 2>/dev/null | grep -v '^null$' || true)
+        DEFAULT_VERSION="0.162.0"
+        VERSION=${VERSION:-$DEFAULT_VERSION}
+
+        if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "::warning::Invalid hugo_version format, using default $DEFAULT_VERSION"
+          VERSION="$DEFAULT_VERSION"
+        fi
+
+        echo "HUGO_VERSION=$VERSION" >> $GITHUB_ENV
+        echo "Using Hugo version: $VERSION"
+
+    # ──────────────────────────────────────────────
+    # 5. 安装前端依赖（Tailwind CSS 等）
+    # ──────────────────────────────────────────────
+    - name: Install dependencies
+      run: |
+        if [ -f "package.json" ]; then
+          echo "Installing dependencies..."
+          pnpm install --no-frozen-lockfile
+        fi
+
+    # ──────────────────────────────────────────────
+    # 6. 安装 Hugo
+    # ──────────────────────────────────────────────
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v3
+      with:
+        hugo-version: '${{ env.HUGO_VERSION }}'
+        extended: true
+
+    # ──────────────────────────────────────────────
+    # 7. 缓存（加速构建）
+    # ──────────────────────────────────────────────
+    - name: Cache Hugo resources
+      uses: actions/cache@v4
+      with:
+        path: |
+          /tmp/hugo_cache_runner/
+          resources/
+        key: ${{ runner.os }}-hugo-resources-${{ hashFiles('assets/**/*', 'config/**/*', 'package.json') }}
+        restore-keys: |
+          ${{ runner.os }}-hugo-resources-
+
+    # ──────────────────────────────────────────────
+    # 8. 构建站点
+    # ──────────────────────────────────────────────
+    - name: Build with Hugo
+      env:
+        HUGO_ENVIRONMENT: production
+        HUGO_BLOX_LICENSE: ${{ secrets.HUGO_BLOX_LICENSE }}
+      run: |
+        hugo --minify --baseURL "https://www.zhangmeng.me/"
+
+    # ──────────────────────────────────────────────
+    # 9. 生成 Pagefind 搜索索引
+    # ──────────────────────────────────────────────
+    - name: Generate Pagefind search index
+      run: |
+        if [ -f "package.json" ] && grep -q "pagefind" package.json; then
+          pnpm run pagefind
+        fi
+
+    # ──────────────────────────────────────────────
+    # 10. 配置 SSH 密钥
+    # ──────────────────────────────────────────────
+    - name: Setup SSH key
+      uses: webfactory/ssh-agent@v0.9.1
+      with:
+        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+
+    # ──────────────────────────────────────────────
+    # 11. 将服务器添加到 known_hosts（防首次连接卡住）
+    # ──────────────────────────────────────────────
+    - name: Add server to known_hosts
+      run: |
+        ssh-keyscan -p ${{ secrets.SERVER_PORT }} -t ed25519,rsa,ecdsa ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
+    # ──────────────────────────────────────────────
+    # 12. 部署到华为云服务器（rsync 同步）
+    # ──────────────────────────────────────────────
+    - name: Deploy via rsync
+      run: |
+        echo "Deploying to ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PORT }}${{ secrets.SERVER_DEPLOY_PATH }}"
+
+        rsync -avz --delete \
+          --exclude='.well-known' \
+          --exclude='.user.ini' \
+          -e "ssh -p ${{ secrets.SERVER_PORT }}" \
+          ./public/ \
+          ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_DEPLOY_PATH }}
+
+        echo "✅ Deployment completed successfully!"
+
+    # ──────────────────────────────────────────────
+    # 13. 部署结果通知
+    # ──────────────────────────────────────────────
+    - name: Deployment summary
+      if: always()
+      run: |
+        if [ "${{ job.status }}" = "success" ]; then
+          echo "✅ 网站已成功部署到 https://www.zhangmeng.me/"
+        else
+          echo "❌ 部署失败，请检查 Actions 日志"
+        fi
