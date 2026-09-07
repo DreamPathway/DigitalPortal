@@ -174,12 +174,25 @@ jobs:
       run: |
         echo "Deploying to ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_PORT }}${{ secrets.SERVER_DEPLOY_PATH }}"
 
-        rsync -avz --delete \
-          --exclude='.well-known' \
-          --exclude='.user.ini' \
-          -e "ssh -p ${{ secrets.SERVER_PORT }}" \
-          ./public/ \
-          ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DEPLOY_PATH }}
+        ok=false
+        for i in 1 2 3; do
+          if rsync -avz --delete --timeout=60 \
+            --exclude='.well-known' \
+            --exclude='.user.ini' \
+            -e "ssh -p ${{ secrets.SERVER_PORT }} -o ConnectTimeout=15" \
+            ./public/ \
+            ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_DEPLOY_PATH }}; then
+            ok=true
+            break
+          fi
+          echo "⚠️ 第 $i 次同步失败，15 秒后重试..."
+          sleep 15
+        done
+
+        if [ "$ok" != true ]; then
+          echo "::error::rsync 三次重试均失败。connection reset 常见原因：服务器 SSH 防爆破/fail2ban 拦截、华为云安全组限流、跨境网络抖动"
+          exit 1
+        fi
 
         echo "✅ Deployment completed successfully!"
 
