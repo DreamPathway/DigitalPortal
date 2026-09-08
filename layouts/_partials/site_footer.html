@@ -12,6 +12,35 @@
   {{ partial $footer_section_path . }}
 
   {{/* ============================================================
+     备案信息（中国大陆网站合规要求）
+     读取 params.yaml 的 hugoblox.beian 配置；字段留空则该项不显示。
+     公安备案图标放 static/images/beian.png，存在才渲染，避免碎图。
+     ============================================================ */}}
+  {{- $beian := site.Params.hugoblox.beian | default dict -}}
+  {{- if or $beian.icp $beian.gongan -}}
+  <div class="beian flex flex-wrap items-center justify-center gap-x-4 gap-y-1 py-2 text-xs opacity-70">
+    {{- with $beian.icp -}}
+    <a href="{{ $beian.icp_link | default "https://beian.miit.gov.cn/" }}"
+       target="_blank" rel="noopener"
+       class="no-underline hover:opacity-100">{{ . }}</a>
+    {{- end -}}
+    {{- $gongan := $beian.gongan -}}
+    {{- with $gongan -}}
+    <a href="{{ $beian.gongan_link | default "https://beian.mps.gov.cn/" }}"
+       target="_blank" rel="noopener"
+       class="no-underline hover:opacity-100 inline-flex items-center gap-1">
+      {{- $iconRel := $beian.gongan_icon | default "images/beian.png" -}}
+      {{- if fileExists (printf "static/%s" $iconRel) -}}
+      <img src="{{ $iconRel | relURL }}" alt="公安备案图标"
+           class="inline-block h-3.5 w-auto" loading="lazy">
+      {{- end -}}
+      <span>{{ $gongan }}</span>
+    </a>
+    {{- end -}}
+  </div>
+  {{- end -}}
+
+  {{/* ============================================================
      "Powered by HugoBlox" 署名 —— 源码已恢复但禁用显示
      ------------------------------------------------------------
      说明：以下为主题 blox@v0.12.0 原版署名逻辑（含 Pro 许可校验、
