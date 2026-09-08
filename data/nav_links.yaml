@@ -1,0 +1,83 @@
+# 网站导航弹窗数据
+# 用法：
+#   - 点击导航栏「导航」菜单弹出
+#   - 按 categories 分组，每组下若干 links
+#   - icon 可选：brands/<名>（品牌图标，如 brands/github）、hero/<名>（通用图标）、emoji/<名>（表情，如 emoji/rocket）
+#   - 新增分组或链接后，hugo 会自动渲染到弹窗中
+
+categories:
+  - name: 常用
+    links:
+      - name: GitHub
+        url: https://github.com
+        icon: brands/github
+        desc: 代码托管
+      - name: Google
+        url: https://www.google.com
+        icon: brands/google
+        desc: 搜索引擎
+      - name: YouTube
+        url: https://www.youtube.com
+        icon: brands/youtube
+        desc: 视频平台
+      - name: 哔哩哔哩
+        url: https://www.bilibili.com
+        icon: brands/bilibili
+        desc: 视频平台
+      - name: 知乎
+        url: https://www.zhihu.com
+        icon: brands/zhihu
+        desc: 问答社区
+      - name: X
+        url: https://x.com
+        icon: brands/x
+        desc: 社交媒体
+
+  - name: 开发
+    links:
+      - name: Docker
+        url: https://hub.docker.com
+        icon: brands/docker
+        desc: 容器镜像
+      - name: Vercel
+        url: https://vercel.com
+        icon: brands/vercel
+        desc: 前端部署
+      - name: Cloudflare
+        url: https://dash.cloudflare.com
+        icon: brands/cloudflare
+        desc: CDN / DNS
+      - name: Netlify
+        url: https://app.netlify.com
+        icon: brands/netlify
+        desc: 站点托管
+      - name: GitLab
+        url: https://gitlab.com
+        icon: brands/gitlab
+        desc: 代码托管
+
+  - name: 社交
+    links:
+      - name: Telegram
+        url: https://web.telegram.org
+        icon: brands/telegram
+        desc: 即时通讯
+      - name: LinkedIn
+        url: https://www.linkedin.com
+        icon: brands/linkedin
+        desc: 职业社交
+
+  - name: 自部署
+    links:
+      - name: CloudMail
+        url: https://mail.011231.xyz/
+        icon: hero/envelope
+        desc: 自定义企业邮箱
+      - name: 订阅管理系统
+        url: https://notice.011231.xyz/
+        icon: hero/bell-alert
+        desc: 订阅服务到期续约提醒
+      - name: Blog
+        url: https://blog.zhangmeng.me/
+        icon: hero/rss
+        desc: 个人博客

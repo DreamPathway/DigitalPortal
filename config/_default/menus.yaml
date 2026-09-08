@@ -12,6 +12,9 @@ main:
   - name: 经历
     url: /#experience
     weight: 30
+  - name: 导航
+    url: '#navlinks'
+    weight: 35
   - name: 博客
     url: /#blog
     weight: 40
