@@ -1,0 +1,11 @@
+{{/* 文章页脚（覆盖主题：分享按钮已移至阅读时长所在的 meta 行右侧，此处不再渲染） */}}
+<div class="max-w-prose print:hidden">
+  {{/* Moved to TOC sidebar */}}
+  {{/* partial "page_edit" . */}}
+
+  {{ partial "tags" . }}
+  {{ partial "page_author" . }}
+  {{ partial "components/next-in-series" . }}
+  {{ partial "page_related" . }}
+  {{ partial "comments" . }}
+</div>

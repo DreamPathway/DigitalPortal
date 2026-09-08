@@ -1,0 +1,22 @@
+{{/* 文章社交分享按钮（覆盖主题：保留原版灰色圆角方块背景，内联排列于文章 meta 行右侧） */}}
+{{ if ne .Params.share false }}
+<div class="flex flex-row items-center gap-1">
+  {{ range where hugo.Data.page_sharer.links "enable" true }}
+
+  {{/* mailto URIs require percent-encoding (%20 for spaces) per RFC 6068, not form-encoding (+ for spaces). */}}
+  {{ $is_mailto := eq (urls.Parse .url).Scheme "mailto" }}
+  {{ $link := replace .url "{url}" (cond $is_mailto (urls.PathEscape $.Permalink) (urlquery $.Permalink)) }}
+  {{ $link = replace $link "{title}" (cond $is_mailto (urls.PathEscape $.Title) (urlquery $.Title)) }}
+  <a
+    target="_blank" rel="noopener"
+    class="inline-flex items-center justify-center rounded-md bg-neutral-300 p-1.5 text-neutral-700 transition-colors hover:bg-primary-500 hover:text-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+    href="{{ $link | safeURL }}"
+    title="{{ .title }}"
+    aria-label="{{ .title }}"
+    id="share-link-{{ .id }}"
+  >
+    {{ partial "functions/get_icon" (dict "name" .icon "attributes" "style=\"height: 1.25em;\"") }}
+  </a>
+  {{ end }}
+</div>
+{{ end }}

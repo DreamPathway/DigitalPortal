@@ -1,0 +1,36 @@
+# 文章社交分享按钮（覆盖主题默认配置）
+# 显示在每篇博客文章底部，用于读者分享本文。
+# enable: true 显示，false 隐藏。
+# 图标：brands/<名>（品牌）、hero/<名>（通用）。
+
+links:
+  - id: x
+    url: 'https://x.com/intent/tweet?url={url}&text={title}'
+    title: X
+    icon: brands/x
+    enable: true
+  - id: email
+    url: 'mailto:?subject={title}&body={url}'
+    title: 邮件分享
+    icon: hero/at-symbol
+    enable: true
+  - id: weibo
+    url: 'https://service.weibo.com/share/share.php?url={url}&title={title}'
+    title: 微博
+    icon: brands/sinaweibo
+    enable: true
+  - id: facebook
+    url: 'https://www.facebook.com/sharer.php?u={url}&t={title}'
+    title: Facebook
+    icon: brands/facebook
+    enable: false
+  - id: linkedin
+    url: 'https://www.linkedin.com/shareArticle?url={url}&title={title}'
+    title: LinkedIn
+    icon: brands/linkedin
+    enable: false
+  - id: whatsapp
+    url: 'whatsapp://send?text={title}%20{url}'
+    title: WhatsApp
+    icon: brands/whatsapp
+    enable: false
