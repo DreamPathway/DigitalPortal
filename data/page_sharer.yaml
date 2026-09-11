@@ -8,7 +8,7 @@ links:
     url: 'https://x.com/intent/tweet?url={url}&text={title}'
     title: X
     icon: brands/x
-    enable: true
+    enable: false
   - id: email
     url: 'mailto:?subject={title}&body={url}'
     title: 邮件分享

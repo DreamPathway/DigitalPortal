@@ -39,10 +39,10 @@ links:
     url: https://github.com/DreamPathway
   # - icon: brands/linkedin
   #   url: https://www.linkedin.com/in/alexjohnson/
-  - icon: brands/x
-    url: https://x.com/zlovem0
-  - icon: brands/telegram
-    url: https://t.me/zlovemo
+  # - icon: brands/x
+  #   url: https://x.com/zlovem0
+  # - icon: brands/telegram
+  #   url: https://t.me/zlovemo
 
 # interests（兴趣）
 interests:
