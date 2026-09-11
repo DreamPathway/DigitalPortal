@@ -116,6 +116,8 @@ sections:
           tag: 后端
         - name: 大数据
           tag: 大数据
+        - name: 自部署
+          tag: 自部署
       # 默认选中的筛选按钮索引（默认选中第 0 个按钮（All））
       default_button_index: 0
       # 归档链接配置——项目数超过 count 时自动显示「Browse All」链接。
