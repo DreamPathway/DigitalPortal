@@ -37,6 +37,10 @@ links:
     label: E-mail Me
   - icon: brands/github
     url: https://github.com/DreamPathway
+    label: GitHub
+  - icon: brands/qq
+    url: https://qm.qq.com/cgi-bin/qm/qr?k=FPeZ9Tm2rcOK77e7txI3wO8fY6UZ10Uw&jump_from=webapi&authKey=ogIB44XQJ8T2f4dLoBN2ONMuktS3av2tLEVNNAq+MD3sE10UikaiAcou0Oosd72A
+    label: QQ
   # - icon: brands/linkedin
   #   url: https://www.linkedin.com/in/alexjohnson/
   # - icon: brands/x
